@@ -22,15 +22,15 @@ io.on('connection', (socket) => {
     socket.on('chatroom-join', ({userName, roomCode}) => {
         console.log('User joined')
         socket.join({roomCode})
-        io.to({roomCode}).emit('message', {userName: 'admin', message: `${userName} has joined`})
+        io.emit('message', {userName: 'admin', message: `${userName} has joined in room ${roomCode}`})
     })
-    
-    socket.on('message', ({userName, message}) => {
+
+    socket.on('send-message', ({userName, message}) => {
         io.emit('message', {userName, message})
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', {userName: 'admin', message: 'An user has left'})
+        io.emit('message', {userName: 'admin', message: 'An user left the room'})
         console.log('User disconnected')
         socket.disconnect(true)
     })

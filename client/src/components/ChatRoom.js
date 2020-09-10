@@ -17,16 +17,10 @@ const ChatRoom = ({ location }) => {
     
     useEffect(() => {
         const { userName, roomCode } = queryString.parse(location.search)
-        
+
         setUserName(userName)
         setRoomCode(roomCode)
-
         socket.emit('chatroom-join', {userName, roomCode})
-
-        return () => {
-            socket.emit('disconnect', {userName})
-            socket.off()
-        }
     }, [location.search, ENDPOINT])
 
     useEffect(() => {
@@ -43,8 +37,7 @@ const ChatRoom = ({ location }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setMessage('')
-        
-        socket.emit('message', {userName, message})
+        socket.emit('send-message', {userName, message})
     }
 
     const renderChat = () => {
@@ -55,11 +48,18 @@ const ChatRoom = ({ location }) => {
         })
     }
 
+    const history = useHistory()
+    const disconnect = () => {
+        socket.emit('disconnect')
+        socket.close()
+        history.push('/')
+    }
+
     return (
         <>
             <div className="top-container">
                 <h2>{roomCode}</h2>
-                <button className="close-button"><a href="/">Close</a></button>
+                <button className="close-button" onClick={() => disconnect()}>Close</button>
             </div>
             <div>
             <ScrollToBottom className="chat-container">
