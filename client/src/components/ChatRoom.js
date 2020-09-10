@@ -17,11 +17,16 @@ const ChatRoom = ({ location }) => {
     
     useEffect(() => {
         const { userName, roomCode } = queryString.parse(location.search)
-
+       
         setUserName(userName)
         setRoomCode(roomCode)
         socket.emit('chatroom-join', {userName, roomCode})
-    }, [location.search, ENDPOINT])
+
+        // return () => {
+        //     socket.emit('disconnect')
+        //     socket.close()
+        // }
+    }, [ENDPOINT, location.search])
 
     useEffect(() => {
         socket.on('message', ({userName, message}) => {

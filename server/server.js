@@ -30,9 +30,10 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
+        
         io.emit('message', {userName: 'admin', message: 'An user left the room'})
         console.log('User disconnected')
-        socket.disconnect(true)
+        socket.disconnect()
     })
 })
 

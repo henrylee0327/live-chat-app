@@ -9,6 +9,8 @@
     width: 500px;
     height: 50px;
     background-color: #48cf6c;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .chat-container {
@@ -33,5 +35,7 @@
 }
 
 .close-button {
-    align-items: flex-end;
+    justify-content: flex-end;
+    background-color: red;
+    
 }
