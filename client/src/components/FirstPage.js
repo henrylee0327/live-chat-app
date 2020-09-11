@@ -1,5 +1,4 @@
-import React, { useEffect, useContext } from 'react'
-import io from 'socket.io-client'
+import React, { useContext } from 'react'
 import './FirstPage.css'
 import { Link } from 'react-router-dom'
 import { ChatContext } from '../ChatContext'

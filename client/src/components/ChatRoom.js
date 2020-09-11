@@ -21,19 +21,29 @@ const ChatRoom = ({ location }) => {
         setUserName(userName)
         setRoomCode(roomCode)
         socket.emit('chatroom-join', {userName, roomCode})
-
-        return () => {
-            socket.emit('disconnect')
-            socket.close('chatroom-join')
-        }
-    }, [ENDPOINT, location.search])
+    
+        // return () => {
+        //     socket.emit('disconnect')
+        //     socket.close('message')
+        // }
+    }, [location.search, ENDPOINT])
 
     useEffect(() => {
         socket.on('message', ({userName, message}) => {
             console.log('This is called?')
             setChats(chats => [...chats, {userName, message}])
         })
+
+    },[])
+
+    useEffect(() => {
+        socket.on('close-message', ({userName, message}) => {
+            console.log('closed')
+            setChats(chats => [...chats, {userName, message}])
+            socket.close('message')
+        })
     }, [])
+
 
     const handleMessage = (e) => {
         var newMessage = e.currentTarget.value
@@ -44,7 +54,7 @@ const ChatRoom = ({ location }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         setMessage('')
-        socket.emit('message', {userName, message})
+        socket.emit('send-message', {userName, message})
     }
 
     const renderChat = () => {
@@ -55,19 +65,19 @@ const ChatRoom = ({ location }) => {
         })
     }
 
-    const history = useHistory()
-    const disconnect = () => {
-        // socket.emit('disconnect')
-        // socket.close()
-        console.log('disconnected')
-        history.push('/')
-    }
+    // const history = useHistory()
+    // const disconnect = () => {
+    //     socket.emit('disconnect')
+    //     socket.close()
+    //     console.log('disconnected')
+    //     history.push('/')
+    // }
 
     return (
         <>
             <div className="top-container">
                 <h2>{roomCode}</h2>
-                <button className="close-button" onClick={() => disconnect()}>Close</button>
+                <button className="close-button"><a href='/'>Close</a></button>
             </div>
             <div>
             <ScrollToBottom className="chat-container">
