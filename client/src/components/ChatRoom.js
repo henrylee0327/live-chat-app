@@ -22,14 +22,15 @@ const ChatRoom = ({ location }) => {
         setRoomCode(roomCode)
         socket.emit('chatroom-join', {userName, roomCode})
 
-        // return () => {
-        //     socket.emit('disconnect')
-        //     socket.close()
-        // }
+        return () => {
+            socket.emit('disconnect')
+            socket.close('chatroom-join')
+        }
     }, [ENDPOINT, location.search])
 
     useEffect(() => {
         socket.on('message', ({userName, message}) => {
+            console.log('This is called?')
             setChats(chats => [...chats, {userName, message}])
         })
     }, [])
@@ -37,12 +38,13 @@ const ChatRoom = ({ location }) => {
     const handleMessage = (e) => {
         var newMessage = e.currentTarget.value
         setMessage(newMessage)
+        
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setMessage('')
-        socket.emit('send-message', {userName, message})
+        socket.emit('message', {userName, message})
     }
 
     const renderChat = () => {
@@ -55,8 +57,9 @@ const ChatRoom = ({ location }) => {
 
     const history = useHistory()
     const disconnect = () => {
-        socket.emit('disconnect')
-        socket.close()
+        // socket.emit('disconnect')
+        // socket.close()
+        console.log('disconnected')
         history.push('/')
     }
 

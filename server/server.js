@@ -21,11 +21,13 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     socket.on('chatroom-join', ({userName, roomCode}) => {
         console.log('User joined')
-        socket.join({roomCode})
+        console.log(roomCode)
+        console.log(userName)
+        socket.join(roomCode)
         io.emit('message', {userName: 'admin', message: `${userName} has joined in room ${roomCode}`})
     })
 
-    socket.on('send-message', ({userName, message}) => {
+    socket.on('message', ({userName, message}) => {
         io.emit('message', {userName, message})
     })
 
