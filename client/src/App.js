@@ -6,16 +6,16 @@ import { ChatContext } from './ChatContext';
 
 function App() {
 
-  const [userName, setUserName] = useState(null)
-  const [roomCode, setRoomCode] = useState(null)
+  const [firstName, setFirstName] = useState(null)
+  const [lastName, setLastName] = useState(null)
 
 
   return (
     <div className="App">
       <Router>
-        <ChatContext.Provider value={{userName, setUserName, roomCode, setRoomCode}}>
+        <ChatContext.Provider value={{firstName, setFirstName, lastName, setLastName}}>
         <Route exact path="/" component={FirstPage}></Route>
-        <Route path="/chatroom" component={ChatRoom}></Route>
+        <Route path="/chat" component={ChatRoom}></Route>
         </ChatContext.Provider>
       </Router>
     </div>

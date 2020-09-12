@@ -5,15 +5,17 @@ import { ChatContext } from '../ChatContext'
 
 const FirstPage = () => {
 
-    const {userName, setUserName} = useContext(ChatContext)
-    const {roomCode, setRoomCode} = useContext(ChatContext)
+    const {firstName, setFirstName} = useContext(ChatContext)
+    const {lastName, setLastName} = useContext(ChatContext)
 
-    const handleName = (e) => {
-        setUserName(e.currentTarget.value)
+    const handleFirst = (evt) => {
+        const firstname = evt.currentTarget.value
+        setFirstName(firstname)
     }
 
-    const handleRoom = (e) => {
-        setRoomCode(e.currentTarget.value)
+    const handleLast = (evt) => {
+        const lastname = evt.currentTarget.value
+        setLastName(lastname)
     }
 
     return (
@@ -22,15 +24,15 @@ const FirstPage = () => {
                 <h1 className="top-header">Join the live chat!</h1>
             </div>
             <div className="form-group">
-                <label>Your name</label>
-                <input type="email" onChange={handleName} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                <label>First name</label>
+                <input type="email" onChange={handleFirst} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
             </div>
             <div className="form-group">
-                <label>Room code</label>
-                <input type="text" onChange={handleRoom} className="form-control" id="exampleInputPassword1"></input>
+                <label>Last name</label>
+                <input type="text" onChange={handleLast} className="form-control" id="exampleInputPassword1"></input>
             </div>
             <div className="button-container">
-                <Link onClick={e => (!userName || !roomCode) ? e.preventDefault() : null} to={`/chatroom?userName=${userName}&roomCode=${roomCode}`}>
+                <Link onClick={e => (!firstName || !lastName) ? e.preventDefault() : null} to={`/chat?firstName=${firstName}&lastName=${lastName}`}>
                 <button type="submit" className="btn btn-primary">Submit</button>
                 </Link>
             </div>

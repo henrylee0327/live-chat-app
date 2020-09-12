@@ -3,39 +3,34 @@ import io from 'socket.io-client'
 import './ChatRoom.css'
 import { ChatContext } from '../ChatContext'
 import ScrollToBottom from 'react-scroll-to-bottom'
-import queryString from 'query-string'
 
 
 const ChatRoom = ({ location }) => {
-    const { userName, setUserName } = useContext(ChatContext)
-    const { roomCode, setRoomCode } = useContext(ChatContext)
+    const { firstName, setFirstName } = useContext(ChatContext)
+    const { lastName, setLastName } = useContext(ChatContext)
     const [message, setMessage] = useState('')
     const [chats, setChats] = useState([])
     const ENDPOINT = 'localhost:5000'
     const socket = io(ENDPOINT)
     
     useEffect(() => {
-        const { userName, roomCode } = queryString.parse(location.search)
        
-        setUserName(userName)
-        setRoomCode(roomCode)
-        socket.emit('chatroom-join', {userName, roomCode})
-    
-    }, [location.search, ENDPOINT])
+        socket.emit('chatroom-join', {firstName, lastName})
+        setFirstName(firstName)
+        setLastName(lastName)
+        
+    }, [])
 
     useEffect(() => {
-        socket.on('message', ({userName, message}) => {
-            console.log('This is called?')
-            setChats(chats => [...chats, {userName, message}])
+        socket.on('message', ({firstName, message}) => {
+            setChats(chats => [...chats, {firstName, message}])
         })
-
     },[])
 
     useEffect(() => {
-        socket.on('close-message', ({userName, message}) => {
-            console.log('closed')
-            setChats(chats => [...chats, {userName, message}])
-            socket.close('message')
+        socket.on('close-message', ({firstName, message}) => {
+            setChats(chats => [...chats, {firstName, message}])
+            socket.close()
         })
     }, [])
 
@@ -43,19 +38,18 @@ const ChatRoom = ({ location }) => {
     const handleMessage = (e) => {
         var newMessage = e.currentTarget.value
         setMessage(newMessage)
-        
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setMessage('')
-        socket.emit('send-message', {userName, message})
+        socket.emit('send-message', {firstName, message})
     }
 
     const renderChat = () => {
-        return chats.map(({userName, message}, index) => {
+        return chats.map(({firstName, message}, index) => {
             return <div key={index}>
-            <p>{userName} : {message}</p>
+            <p>{firstName} : {message}</p>
             </div>
         })
     }
@@ -64,7 +58,7 @@ const ChatRoom = ({ location }) => {
         <>  
             <div className="top-container">
                 <div className="top-container-left">
-                    <h2 className="room-code">Room: {roomCode}</h2>
+                    <h2 className="room-code">Welcome {lastName}</h2>
                 </div>
                 <div className="top-container-right">
                     <button className="close-button"><a href="/">Close</a></button>

@@ -19,21 +19,18 @@ app.get('/', (req, res) => {
 
 // Socket.io API
 io.on('connection', (socket) => {
-    socket.on('chatroom-join', ({userName, roomCode}) => {
-        console.log('User joined')
-        socket.join(roomCode)
-        io.emit('message', {userName: 'admin', message: `${userName} has joined in room ${roomCode}`})
+    socket.on('chatroom-join', ({firstName, lastName}) => {
+        socket.join({firstName, lastName})
+        io.emit('message', {firstName: 'admin', message: `${firstName} has joined`})
     })
 
-    socket.on('send-message', ({userName, message}) => {
-        io.emit('message', {userName, message})
+    socket.on('send-message', ({firstName, message}) => {
+        io.emit('message', {firstName, message})
     })
 
     socket.on('disconnect', () => {
-        io.emit('close-message', {userName: 'admin', message: 'An user left the room'})
-        socket.disconnect('message')
-        console.log('User disconnected')
-
+        io.emit('close-message', {firstName: 'admin', message: 'An user left'})
+        socket.disconnect()
     })
 })
 
