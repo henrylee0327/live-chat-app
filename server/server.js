@@ -12,6 +12,8 @@ const port = process.env.PORT || 5000
 
 // Middleware
 app.use(express.static('../client/build'))
+app.use(cors())
+
 
 app.get('/', (req, res) => {
     res.render('index.html')
