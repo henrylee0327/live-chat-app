@@ -4,7 +4,6 @@ import './ChatRoom.css'
 import { ChatContext } from '../ChatContext'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import queryString from 'query-string'
-import {useHistory} from 'react-router-dom'
 
 
 const ChatRoom = ({ location }) => {
@@ -22,10 +21,6 @@ const ChatRoom = ({ location }) => {
         setRoomCode(roomCode)
         socket.emit('chatroom-join', {userName, roomCode})
     
-        // return () => {
-        //     socket.emit('disconnect')
-        //     socket.close('message')
-        // }
     }, [location.search, ENDPOINT])
 
     useEffect(() => {
@@ -65,19 +60,15 @@ const ChatRoom = ({ location }) => {
         })
     }
 
-    // const history = useHistory()
-    // const disconnect = () => {
-    //     socket.emit('disconnect')
-    //     socket.close()
-    //     console.log('disconnected')
-    //     history.push('/')
-    // }
-
     return (
-        <>
+        <>  
             <div className="top-container">
-                <h2>{roomCode}</h2>
-                <button className="close-button"><a href='/'>Close</a></button>
+                <div className="top-container-left">
+                    <h2 className="room-code">Room: {roomCode}</h2>
+                </div>
+                <div className="top-container-right">
+                    <button className="close-button"><a href="/">Close</a></button>
+                </div>
             </div>
             <div>
             <ScrollToBottom className="chat-container">
@@ -85,7 +76,7 @@ const ChatRoom = ({ location }) => {
             </ScrollToBottom>
             </div>
             <form className="form-inline" onSubmit={handleSubmit}>
-                <input type="text" className="message-input" onChange={handleMessage} value={message} placeholder="Type message..." aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                <input type="text" className="message-input" onChange={handleMessage} value={message} placeholder="Type a message..." aria-label="Recipient's username" aria-describedby="basic-addon2" />
                 <button className="message-button" type="submit">Send</button>
             </form>
         </>

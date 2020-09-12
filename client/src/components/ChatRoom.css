@@ -4,21 +4,40 @@
 
 .top-container {
     margin-left: 30%;
-    border: 1px solid #141313;
     margin-top: 50px;
     width: 500px;
-    height: 50px;
-    background-color: #48cf6c;
+    height: 70px;
+    background-color: #2979FF;
+    border-color: gray;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.top-container-left {
+    display: flex;
+    align-items: center;
+    color: white;
+    flex: 0.9;
+}
+
+.top-container-right {
     display: flex;
     justify-content: flex-end;
+    color: white;
+}
+
+.close-button {
+    border-radius: 4px;
+    color: white;
 }
 
 .chat-container {
     margin-left: 30%;
     border: 1px solid #141313;
     width: 500px;
-    height: 500px;
-    overflow-y: auto;
+    height: 400px;
+    border-color: gray;
 }
 
 .form-inline {
@@ -27,15 +46,12 @@
 
 .message-input {
     width: 430px;
+    height: 70px;
 }
 
 .message-button {
     width: 70px;
-    background-color: royalblue;
-}
-
-.close-button {
-    justify-content: flex-end;
-    background-color: red;
-    
+    height: 70px;
+    background-color: #2979FF;
+    color: white;
 }
