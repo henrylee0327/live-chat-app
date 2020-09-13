@@ -10,8 +10,9 @@ const ChatRoom = ({ location }) => {
     const { lastName, setLastName } = useContext(ChatContext)
     const [message, setMessage] = useState('')
     const [chats, setChats] = useState([])
-    const ENDPOINT = 'localhost:5000'
-    const socket = io(ENDPOINT)
+    const ENDPOINT = 'https://git.heroku.com/henrys-live-chat-app.git'
+    // const ENDPOINT = 'localhost:5000'
+    const socket = io.connect(ENDPOINT)
     
     useEffect(() => {
        
