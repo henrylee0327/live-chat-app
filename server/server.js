@@ -14,9 +14,9 @@ app.use(express.static('../client/build'))
 app.use(cors())
 
 
-app.get('/', (req, res) => {
-    res.render('index.html')
-})
+// app.get('/', (req, res) => {
+//     res.render('index.html')
+// })
 
 // Socket.io API
 io.on('connection', (socket) => {
