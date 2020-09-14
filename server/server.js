@@ -9,7 +9,7 @@ const io = socketio(server)
 
 const port = process.env.PORT || 5000
 
-// Middleware...
+// Middleware
 app.use(express.static('../client/build'))
 app.use(cors())
 
