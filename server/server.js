@@ -18,6 +18,10 @@ app.use(cors())
 //     res.render('index.html')
 // })
 
+app.get('/', (req, res) => {
+    res.send('server is up and running').status(200)
+})
+
 // Socket.io API
 io.on('connection', (socket) => {
     socket.on('chatroom-join', ({firstName, lastName}) => {
