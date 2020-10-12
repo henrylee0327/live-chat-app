@@ -12,4 +12,4 @@ Backend: Socket.io
 ## Home page of the application
 You will need to enter your First and Last name to enter the room.
 
-![Image](pictures/HomePage.png)
+![](.../pictures/HomePage.png)
