@@ -11,4 +11,4 @@ Backend: Socket.io
 ```
 Home page of the application
 
-![](pictures/homepage.png)
+![](pictures/HomePage.png)
