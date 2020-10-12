@@ -9,6 +9,7 @@ Technologies used to create an application
 Frontend: ReactJS
 Backend: Socket.io
 ```
-Home page of the application
+## Home page of the application
+You will need to enter your First and Last name to enter the room.
 
-![](pictures/HomePage.png)
+![Image](pictures/HomePage.png)
