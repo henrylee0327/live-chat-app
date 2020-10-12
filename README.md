@@ -23,6 +23,7 @@ Welcome message is sent to everyone in the room after User 2 joined the room
 
 ## View from User 2
 View from User 2
+
 ![Image of homepage](https://github.com/henrylee0327/live-chat-app/blob/master/pictures/user2view.png)
 
 ## User sign-out
