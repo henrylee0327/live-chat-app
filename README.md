@@ -12,4 +12,4 @@ Backend: Socket.io
 ## Home page of the application
 You will need to enter your First and Last name to enter the room.
 
-![](.../pictures/HomePage.png)
+![Image of homepage](https://github.com/henrylee0327/live-chat-app/blob/master/pictures/homepage.png)
